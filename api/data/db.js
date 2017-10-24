@@ -32,5 +32,5 @@ process.once('SIGUSR2', function() {
 
 
 // BRING IN YOUR SCHEMAS & MODELS
-
+require('./list.model');
 require('./user.model');

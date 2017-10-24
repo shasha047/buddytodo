@@ -12,7 +12,13 @@ var userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  creator_list:[{
+    type:mongoose.Schema.Types.ObjectId
+  }],
+  buddy_list:[{
+    type:mongoose.Schema.Types.ObjectId
+  }]
 });
 
 mongoose.model('user', userSchema);
