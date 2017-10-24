@@ -1,0 +1,25 @@
+{
+  "name": "buddytodo",
+  "version": "1.0.0",
+  "description": "todo list for buddy",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shasha047/buddytodo.git"
+  },
+  "keywords": [
+    "MEAN Stack"
+  ],
+  "author": "shashank bhatnagar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shasha047/buddytodo/issues"
+  },
+  "homepage": "https://github.com/shasha047/buddytodo#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
