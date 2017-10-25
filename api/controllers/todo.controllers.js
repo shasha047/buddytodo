@@ -65,7 +65,10 @@ module.exports.createlist = function(req,res){
                                     cudoc.creator_list.push(savedlist._id);
                                     cudoc.save();
 
-                                    return res.status(200).json("list created successfully");        
+                                    return res.status(200).json({
+                                        "data":savedlist,
+                                        "message":"list created successfully"
+                                    });        
                                 }
                             })
                         }
@@ -92,7 +95,7 @@ module.exports.createtask = function(req,res){
 
         }
         else if(!ldoc){
-            return res.status(500).json("this combination of list not exists");
+            return res.status(500).json("this combination of list,creator,buddy is not exists");
         }
         else{
             if(loggedin_email===creator_email){
@@ -140,7 +143,7 @@ module.exports.changestatus = function(req,res){
 
 module.exports.mycreatedtasks = function(req,res){
     list
-    .find({creator_email:req.params.creator_email})
+    .find({creator_email:req.params.creator_emailg})
     .exec((err,ldoc)=>{
         if(err){
 
@@ -164,17 +167,6 @@ module.exports.mybuddytasks = function(req,res){
             return res.status(400).json("ERR occured in the system")
         }
         else if(ldoc.length>0){
-            
-            // var fldoc=[];
-
-            // ldoc.map((item,index)=>{
-            //     item.tasks.map((itm,idx)=>{
-            //         if(itm.status=="pending"){
-            //             fldoc.push(item)
-            //         }
-            //     })
-            // })
-
             return res.status(200).json(ldoc)
         }
         else{
@@ -182,4 +174,27 @@ module.exports.mybuddytasks = function(req,res){
         }
     })
 };
+
+// module.exports.deletelist=function(req,res){
+
+//     console.log("list_id",req.body.list_id)
+//     list
+//     .findById(req.body.list_id)
+//     .exec((err,ldoc)=>{
+//         if(err){
+
+//             }
+//             else if(!ldoc){
+//                 return res.status(500).json("not allowed to delete")
+//             }
+//             else{
+
+                
+//                 ldoc.archived=true;
+//                 ldoc.save();
+//                 return res.status(200).json("successfully deleted the list");
+//             }
+//     })
+        
+// };
 

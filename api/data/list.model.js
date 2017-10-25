@@ -23,6 +23,10 @@ var listSchema = new mongoose.Schema({
           type:String
       }
   }],
+//   archived:{
+//     type:Boolean,
+//     default:false
+//   },
   timestamp:{
       type:Date,
       default:Date.now

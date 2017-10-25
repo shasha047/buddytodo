@@ -1,0 +1,62 @@
+<h1>Tasks Assigned to {{vm.loggedInUser}} </h1>
+<hr/>
+
+<div class="container" ng-init="vm.assigned()">
+  
+  <center>
+  <table class="table" ng-repeat="list in vm.lists" class="col-md-12">
+    <thead >
+        <tr>
+            <td class="info">{{list.name}}</td>
+        </tr>
+      <tr>
+        <th class="col-md-3">Task</th>
+        <th class="col-md-3">Creator Email</th>
+        <th class="col-md-3">Status</th>
+        <th class="col-md-3">Completion Punch</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="task in list.tasks|filter:'pending'">
+        <td class="col-md-3">{{task.content}}</td>
+        <td class="col-md-3">{{list.creator_email}}</td>
+        <td class="col-md-3">{{task.status}}</td>
+        <td class="col-md-3"><button class="btn btn-primary" ng-click="vm.changestatus(list.name,list.creator_email,task._id)">Punch Me On Completion</button></td>
+      </tr>      
+      <tr ng-if="list.tasks.length==0">
+            <td><i>No tasks Pending in this list</i></td>
+      </tr>
+      
+    </tbody>
+  </table>
+</center>
+</div>
+
+<!-- </body>
+</html> -->
+
+      <!-- <tr class="success">
+        <td>Success</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr class="danger">
+        <td>Danger</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr class="info">
+        <td>Info</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+      <tr class="warning">
+        <td>Warning</td>
+        <td>Refs</td>
+        <td>bo@example.com</td>
+      </tr>
+      <tr class="active">
+        <td>Active</td>
+        <td>Activeson</td>
+        <td>act@example.com</td>
+      </tr>-->

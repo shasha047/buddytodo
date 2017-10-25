@@ -7,7 +7,11 @@ var ctrlTodo = require('../controllers/todo.controllers.js');
 
 router
   .route('/btodo/list')
-  .post(ctrlTodo.createlist);
+  .post(ctrlTodo.createlist)
+
+// router
+//   .route('/btodo/deletelist')
+//   .post(ctrlTodo.deletelist)
 
 router
   .route('/btodo/task')

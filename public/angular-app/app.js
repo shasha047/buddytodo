@@ -11,22 +11,38 @@ function config($httpProvider, $routeProvider, $locationProvider) {
         restricted: false
       }
     })
-    // .when('/quesans', {
-    //   templateUrl: 'angular-app/quesans-list/quesanswers.html',
-    //   controller: qasController,
-    //   controllerAs: 'vm',
-    //   access: {
-    //     restricted: false
-    //   }
-    // })
-    // .when('/quesans/:id', {
-    //   templateUrl: 'angular-app/quesans-display/quesans.html',
-    //   controller: qaController,
-    //   controllerAs: 'vm',
-    //   access: {
-    //     restricted: false
-    //   }
-    // })
+    .when('/created', {
+      templateUrl: 'angular-app/created_tasks/created.html',
+      controller: createdController,
+      controllerAs: 'vm',
+      access: {
+        restricted: false
+      }
+    })
+    .when('/assigned', {
+      templateUrl: 'angular-app/assigned_tasks/assigned.html',
+      controller: assignedController,
+      controllerAs: 'vm',
+      access: {
+        restricted: false
+      }
+    })
+    .when('/addlist', {
+      templateUrl: 'angular-app/new_list/addlist.html',
+      controller: addlistController,
+      controllerAs: 'vm',
+      access: {
+        restricted: false
+      }
+    })
+    .when('/addtask', {
+      templateUrl: 'angular-app/new_task/addtask.html',
+      controller: addtaskController,
+      controllerAs: 'vm',
+      access: {
+        restricted: false
+      }
+    })
     .when('/register', {
       templateUrl: 'angular-app/register/register.html',
       controller: RegisterController,

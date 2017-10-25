@@ -14,7 +14,10 @@
        <li ng-class="vm.isActiveTab('')" class="active"><a href="#/">Home</a></li>
        <!-- <li ng-class="vm.isActiveTab('quesans')"><a href="#/quesans">quesans</a></li> -->
        <li ng-class="vm.isActiveTab('register')" ng-if="!vm.isLoggedIn()"><a href="#/register">Register</a></li>
-       <li ng-class="vm.isActiveTab('profile')" ng-if="vm.isLoggedIn()"><a href="#/profile">Profile</a></li>
+       <li ng-class="vm.isActiveTab('created')" ng-if="vm.isLoggedIn()"><a href="#/created">Created Tasks</a></li>
+       <li ng-class="vm.isActiveTab('assigned')" ng-if="vm.isLoggedIn()"><a href="#/assigned">Assigned Tasks</a></li>
+       <li ng-class="vm.isActiveTab('addlist')" ng-if="vm.isLoggedIn()"><a href="#/addlist">New List</a></li>
+       <li ng-class="vm.isActiveTab('addtask')" ng-if="vm.isLoggedIn()"><a href="#/addtask">New Task</a></li>
      </ul>
      <form ng-if="!vm.isLoggedIn()" class="navbar-form navbar-right" role="login" ng-submit="vm.login()">
       <div class="form-group" ng-class="{'has-error': vm.error}">

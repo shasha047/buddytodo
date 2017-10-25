@@ -1,3 +1,5 @@
+// loggedinuser;
+
 angular.module('buddytodo').controller('LoginController', LoginController);
 
 function LoginController($http, $location, $window, AuthFactory, jwtHelper) {
@@ -25,6 +27,7 @@ function LoginController($http, $location, $window, AuthFactory, jwtHelper) {
           var token = $window.sessionStorage.token;
           var decodedToken = jwtHelper.decodeToken(token);
           vm.loggedInUser = decodedToken.email;
+          // loggedinuser=vm.loggedInUser;
         }
       }).catch(function(error) {
         console.log(error);

@@ -1,0 +1,19 @@
+<h1>add new list </h1>
+
+<div ng-if="vm.message" class="alert alert-success" role="alert">
+  <p>{{ vm.message }}</p>
+</div>
+<div ng-if="vm.error" class="alert alert-danger" role="alert">
+  {{ vm.error }}
+</div>
+<form ng-hide="vm.message" name="addlist" ng-submit="vm.addlist()">
+  <div class="form-group">
+    <label for="name">List name</label>
+    <input type="name" class="form-control" id="name" placeholder="List Name" ng-model="vm.name" autocapitalize="none">
+  </div>
+  <div class="form-group">
+    <label for="buddy_email">buddy email</label>
+    <input type="email" class="form-control" id="buddy_email" placeholder="Buddy Email Id" ng-model="vm.buddy_email" autocapitalize="none">
+  </div>
+  <button type="submit" class="btn btn-success">Create List</button>
+</form>
