@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 var user     = mongoose.model('user');
 var list     = mongoose.model('list');
 
@@ -9,12 +10,17 @@ module.exports.createlist = function(req,res){
     var buddy_email = req.body.buddy_email;
     var creator_email = req.body.creator_email;
 
+    console.log("list_name",list_name);
+    console.log("buddy_email",buddy_email);
+    console.log("creator_email",creator_email);
+
     user
     .findOne({email:buddy_email})
     .select('buddy_list')
     .exec((err,udoc)=>{
         if(err){
-            return res.status(400).json("ERR occured in the system");
+            console.log("1 ",err);
+            return res.status(400).json(err);
         }
         else if(!udoc){
             return res.status(500).json("buddy not available on the system");
@@ -25,7 +31,7 @@ module.exports.createlist = function(req,res){
             .findOne({name:list_name,creator_email:creator_email,buddy_email:buddy_email})
             .exec((err,ldoc)=>{
                 if(err){
-
+                    console.log("2 ",err);
                 }
                 else if(ldoc){
                     return res.status(409).json("This combination of list already exists.");
@@ -39,7 +45,8 @@ module.exports.createlist = function(req,res){
 
                     new_list.save((err,savedlist)=>{
                         if(err){
-                            return res.status(400).json("ERR occured in the system");
+                            console.log("3 ",err);
+                            return res.status(400).json(err);
                         }
                         else{
                             
@@ -51,7 +58,8 @@ module.exports.createlist = function(req,res){
                             .select('creator_list')
                             .exec((err,cudoc)=>{
                                 if(err){
-                                    return res.status(400).json("ERR occured in the system");
+                                    console.log("4 ",err);
+                                    return res.status(400).json(err);
                                 }
                                 else{
                                     cudoc.creator_list.push(savedlist._id);
@@ -113,8 +121,10 @@ module.exports.changestatus = function(req,res){
     var buddy_email = req.body.buddy_email;
 
     list
-    .findOne({name:name,creator_email:creator_email,buddy_email:buddy_email})
-    .exec((err,ldoc)=>{
+    .findOneAndUpdate(
+        {name:name,creator_email:creator_email,buddy_email:buddy_email,"tasks._id":req.body.task_id},
+        {$set:{"tasks.$.status":"completed"}},
+        ((err,ldoc)=>{
         if(err){
 
         }
@@ -122,17 +132,15 @@ module.exports.changestatus = function(req,res){
             return res.status(400).json("no list available");
         }
         else{
-            ldoc.tasks[req.body.task_index].status="completed";
-            ldoc.save();
-
             return res.status(200).json("task status updated successfully");
         }
     })
+    )
 };
 
-module.exports.createdtasks = function(req,res){
+module.exports.mycreatedtasks = function(req,res){
     list
-    .find({creator_email:req.body.creator_email})
+    .find({creator_email:req.params.creator_email})
     .exec((err,ldoc)=>{
         if(err){
 
@@ -147,14 +155,26 @@ module.exports.createdtasks = function(req,res){
 };
 
 
-module.exports.buddytasks = function(req,res){
+module.exports.mybuddytasks = function(req,res){
+
     list
-    .find({buddy_email:buddy_email,"tasks.status"==="pending"})
+    .find({buddy_email:req.params.buddy_email})
     .exec((err,ldoc)=>{
         if(err){
-
+            return res.status(400).json("ERR occured in the system")
         }
         else if(ldoc.length>0){
+            
+            // var fldoc=[];
+
+            // ldoc.map((item,index)=>{
+            //     item.tasks.map((itm,idx)=>{
+            //         if(itm.status=="pending"){
+            //             fldoc.push(item)
+            //         }
+            //     })
+            // })
+
             return res.status(200).json(ldoc)
         }
         else{

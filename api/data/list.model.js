@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var autoIncrement = require('mongoose-auto-increment');
+mongoose.Promise = require('bluebird');
+// var autoIncrement = require('mongoose-auto-increment');
 
 var listSchema = new mongoose.Schema({
   name:{
@@ -12,9 +13,9 @@ var listSchema = new mongoose.Schema({
       type:String
   },
   tasks:[{
-      task_index:{
-
-      },
+    //   task_index:{
+    //      type:Number
+    //   },
       content:{
           type:String
       },
@@ -28,6 +29,6 @@ var listSchema = new mongoose.Schema({
   }
 });
 
-userSchema.plugin(autoIncrement.plugin, { model: 'list', field: 'tasks.task_index',startAt: 0, incrementBy: 1 });
+// listSchema.plugin(autoIncrement.plugin, { model: 'list', field: 'tasks.task_index',startAt: 0, incrementBy: 1 });
 
 mongoose.model('list', listSchema);

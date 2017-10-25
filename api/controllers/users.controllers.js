@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 var user     = mongoose.model('user');
 var bcrypt   = require('bcrypt-nodejs');
 var jwt      = require('jsonwebtoken');

@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment');
 var dburl = 'mongodb://localhost:27017/buddytodo';
 var retry = null;
-mongoose.connect(dburl);
-
+mongoose.Promise = require('bluebird');
+mongoose.connection.openUri(dburl);
+autoIncrement.initialize(mongoose.connection.openUri(dburl));
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
   console.log('Mongoose connected to ' + dburl);
